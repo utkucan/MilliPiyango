@@ -35,11 +35,10 @@ public class FetchJsonTask<T> extends AsyncTask<Object, Void, T> {
 	}
 	private Class<T> object;
 	private String path;
-//	private String asp;
 	private boolean sessionFlag = true;
 	private Callback<T> callback;
 
-	public FetchJsonTask(Class<T> object, String path, /*String asp ,*/ Callback<T> callback) {
+	public FetchJsonTask(Class<T> object, String path, Callback<T> callback) {
 		this.object = object;
 		this.path = path;
 //		this.asp = asp;
@@ -50,8 +49,8 @@ public class FetchJsonTask<T> extends AsyncTask<Object, Void, T> {
 	@Override
 	protected T doInBackground(Object... params) {
 		HttpClient httpclient = new DefaultHttpClient();
-		Log.d("FetchJsonRequest", Constants.CEKILIS_URL + path);
-		HttpPost httppost = new HttpPost(Constants.CEKILIS_URL + path);
+		Log.d("FetchJsonRequest", Constants.BASE_URL + path);
+		HttpPost httppost = new HttpPost(Constants.BASE_URL + path);
 //		httppost.addHeader("Cookie","ASP.NET_SessionId="+asp);//"ASP.NET_SessionId=qxa0dzhlq02usf0pix3l3hrw");
 		
 		try {

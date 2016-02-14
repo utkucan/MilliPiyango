@@ -1,29 +1,82 @@
 package com.piyango.millipiyango;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.piyango.json.FetchJsonTask;
 import com.piyango.json.RequestManager;
 import com.piyango.model.SayisalSonuc;
+import com.piyango.model.SonucTarih;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends Activity {
 	public static ArrayList<String> tarihList = new ArrayList<String>();
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+    private ProgressDialog mConnectionProgressDialog;
 
+    @Override
+	protected void onCreate(Bundle savedInstanceState) {
 
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
+
+        mConnectionProgressDialog = new ProgressDialog(MainActivity.this);
+        mConnectionProgressDialog.setCancelable(false);
+        mConnectionProgressDialog.setMessage("Tarih bilgileri yükleniyor...");
+
+        RequestManager.getSayisalSonucTarihleri(new CekilisRequest.Callback<String>() {
+            @Override
+            public void onFail() {
+                mConnectionProgressDialog.dismiss();
+            }
+
+            @Override
+            public void onStart() {
+                mConnectionProgressDialog.show();
+            }
+
+            @Override
+            public void onSuccess(String obj) {
+                try {
+                    JSONArray mJsonArray = new JSONArray(obj);
+
+                    ArrayList<String> tarihList = new ArrayList<String>();
+                    JSONObject mJsonObject = new JSONObject();
+                    for (int i = 0; i < mJsonArray.length(); i++) {
+                        mJsonObject = mJsonArray.getJSONObject(i);
+                        tarihList.add(mJsonObject.getString("tarih"));
+                        mJsonObject.getString("tarihView");
+                    }
+
+                    ArrayAdapter<CharSequence> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_spinner_item, tarihList);
+                    Spinner _EmpSpinner = (Spinner) findViewById(R.id.tarihSpinner);
+                    _EmpSpinner.setAdapter(adapter);
+
+                } catch (Exception e) {
+
+                }
+                mConnectionProgressDialog.dismiss();
+            }
+        }, "sayisal");
+
 
 		Button btn = (Button)findViewById(R.id.requestButton);
 		btn.setOnClickListener(new OnClickListener() {
@@ -51,7 +104,7 @@ public class MainActivity extends Activity {
 						TextView v1 = (TextView)findViewById(R.id.sonucTextView);
 						v1.setText(obj.data.rakamlarNumaraSirasi);
                     }
-                },"20160213" ,"","");
+                },"20160213");
 			}
 		});
 	}

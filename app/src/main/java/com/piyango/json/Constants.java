@@ -12,6 +12,7 @@ import android.webkit.MimeTypeMap;
 public class Constants {
 //http://www.millipiyango.gov.tr/sonuclar/cekilisler/sayisal/20131214.json
 	final public static String PROD_URL = "http://www.millipiyango.gov.tr/";
+	final public static String BASE_URL = "http://www.millipiyango.gov.tr/";
 	final public static String CEKILIS_URL = "http://www.millipiyango.gov.tr/sonuclar/cekilisler/";
 
 	final public static long oneMinute = 60000; 
