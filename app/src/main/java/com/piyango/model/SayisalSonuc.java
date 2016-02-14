@@ -15,62 +15,77 @@ public class SayisalSonuc {
     public class IkramiyeDetay{
         public String oid, kisiBasinaDusenIkramiye, kisiSayisi, tur;
     }
+    public class IkramiyeIlIlce{
+        public String il, ilView,ilce,ilceView;
+        //        "il": "09",
+//            "ilView": "AYDIN",
+//            "ilce": "00917",
+//            "ilceView": "DİDİM"
+    }
     public class SayisalModel{
         public List<IkramiyeDetay> bilenKisiler;
-
-        public String oid, hafta, buyukIkramiyeKazananIl, cekilisTarihi,cekilisTuru,rakamlar,rakamlarNumaraSirasi,devretti,devirSayisi,kibrisHasilati;
+        public List<IkramiyeIlIlce> buyukIkrKazananIlIlceler;
+        public String oid, hafta, buyukIkramiyeKazananIl, cekilisTarihi,cekilisTuru,rakamlar,rakamlarNumaraSirasi,devretti,devirSayisi,kibrisHasilati,buyukIkramiye;
     }
 
 
+//{
+//    "success": true,
+//        "data": {
+//    "oid": "64myutiklhnhgq00",
+//            "hafta": 1005,
+//            "buyukIkramiyeKazananIl": "",
+//            "cekilisTarihi": "13/02/2016",
+//            "cekilisTuru": "SAYISAL_LOTO",
+//            "rakamlar": "34#17#32#19#28#25",
+//            "rakamlarNumaraSirasi": "17 - 19 - 25 - 28 - 32 - 34",
+//            "devretti": false,
+//            "devirSayisi": 0,
+//            "bilenKisiler": [
 //    {
-//        "success": true,
-//            "data": {
-//        "oid": "64zlrohp78ctyh00",
-//                "hafta": 892,
-//                "buyukIkramiyeKazananIl": "",
-//                "cekilisTarihi": "14/12/2013",
-//                "cekilisTuru": "SAYISAL_LOTO",
-//                "rakamlar": "47#18#42#26#01#11",
-//                "rakamlarNumaraSirasi": "01 - 11 - 18 - 26 - 42 - 47",
-//                "devretti": true,
-//                "devirSayisi": 2,
-//                "bilenKisiler": [
-//        {
-//            "oid": "64zlrshp78ctyd03",
-//                "kisiBasinaDusenIkramiye": 6.05,
-//                "kisiSayisi": 231575,
-//                "tur": "$3_BILEN"
-//        },
-//        {
-//            "oid": "64zlrshp78ctyd02",
-//                "kisiBasinaDusenIkramiye": 41.85,
-//                "kisiSayisi": 12162,
-//                "tur": "$4_BILEN"
-//        },
-//        {
-//            "oid": "64zlrshp78ctyd01",
-//                "kisiBasinaDusenIkramiye": 3104.45,
-//                "kisiSayisi": 214,
-//                "tur": "$5_BILEN"
-//        },
-//        {
-//            "oid": "64zlrshp78ctyd00",
-//                "kisiBasinaDusenIkramiye": 3122383.17,
-//                "kisiSayisi": 0,
-//                "tur": "$6_BILEN"
-//        }
-//        ],
-//        "buyukIkrKazananIlIlceler": [],
-//        "kibrisHasilati": 53181,
-//                "devirTutari": 1544545.66,
-//                "kolonSayisi": 14504552,
-//                "kdv": 1651306.73,
-//                "toplamHasilat": 10878414,
-//                "hasilat": 9227107.27,
-//                "sov": 922710.73,
-//                "ikramiyeEH": 8304396.539999999,
-//                "buyukIkramiye": 1577835.34,
-//                "haftayaDevredenTutar": 3122383.17
+//        "oid": "64j463iklhnhgl03",
+//            "kisiBasinaDusenIkramiye": 7.05,
+//            "kisiSayisi": 216587,
+//            "tur": "$3_BILEN"
+//    },
+//    {
+//        "oid": "64j463iklhnhgl02",
+//            "kisiBasinaDusenIkramiye": 45.55,
+//            "kisiSayisi": 11942,
+//            "tur": "$4_BILEN"
+//    },
+//    {
+//        "oid": "64j463iklhnhgl01",
+//            "kisiBasinaDusenIkramiye": 3132.7,
+//            "kisiSayisi": 230,
+//            "tur": "$5_BILEN"
+//    },
+//    {
+//        "oid": "64j463iklhnhgl00",
+//            "kisiBasinaDusenIkramiye": 1710869.8,
+//            "kisiSayisi": 1,
+//            "tur": "$6_BILEN"
 //    }
+//    ],
+//    "buyukIkrKazananIlIlceler": [
+//    {
+//        "il": "09",
+//            "ilView": "AYDIN",
+//            "ilce": "00917",
+//            "ilceView": "DİDİM"
+//    }
+//    ],
+//    "kibrisHasilati": 57170,
+//            "devirTutari": 0.04,
+//            "kolonSayisi": 11795707,
+//            "kdv": 1790624.29,
+//            "toplamHasilat": 11795707,
+//            "hasilat": 10005082.71,
+//            "sov": 1000508.27,
+//            "ikramiyeEH": 9004574.440000001,
+//            "buyukIkramiye": 1710869.14,
+//            "haftayaDevredenTutar": 0.01
+//}
+//}
 
 }

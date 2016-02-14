@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.piyango.json.FetchJsonTask;
 import com.piyango.json.RequestManager;
@@ -46,11 +47,11 @@ public class MainActivity extends Activity {
                     @Override
                     public void onSuccess(final SayisalSonuc obj) {
                         Log.d("MilliPiyango", "YAY!");
-                        Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi );
-
-
+                        Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi + "\t" + obj.data.buyukIkrKazananIlIlceler.get(0).il );
+						TextView v1 = (TextView)findViewById(R.id.sonucTextView);
+						v1.setText(obj.data.rakamlarNumaraSirasi);
                     }
-                },"20131214" ,"","");
+                },"20160213" ,"","");
 			}
 		});
 	}
