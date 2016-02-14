@@ -28,7 +28,7 @@
             android:id="@+id/requestButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Test 2" />
+            android:text="Kaç Bildim" />
 
     </LinearLayout>
 
@@ -155,4 +155,14 @@
             android:id="@+id/editText6"
             android:text="20"/>
     </LinearLayout>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/kacBildimBar"
+        android:layout_gravity="center_horizontal"
+        android:max="6"
+        android:progress="0" />
 </LinearLayout>

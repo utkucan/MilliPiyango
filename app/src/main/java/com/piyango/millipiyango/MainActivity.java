@@ -15,6 +15,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ import org.json.JSONObject;
 public class MainActivity extends Activity {
 	public static ArrayList<String> tarihList = new ArrayList<String>();
     private ProgressDialog mConnectionProgressDialog;
+    private String cikanRakam = "";
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -86,11 +89,7 @@ public class MainActivity extends Activity {
 
                                 @Override
                                 public void onSuccess(final SayisalSonuc obj) {
-                                    Log.d("MilliPiyango", "YAY!");
-                                    Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi);
-                                    TextView v1 = (TextView) findViewById(R.id.sonucTextView);
-                                    v1.setText(obj.data.rakamlarNumaraSirasi);
-                                    ((TextView) findViewById(R.id.tarihTextView)).setText(obj.data.cekilisTarihi);
+                                   updateDash(obj);
                                 }
                             }, parent.getAdapter().getItem(position).toString());
                         }
@@ -110,11 +109,7 @@ public class MainActivity extends Activity {
 
                                 @Override
                                 public void onSuccess(final SayisalSonuc obj) {
-                                    Log.d("MilliPiyango", "YAY!");
-                                    Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi + "\t" + obj.data.buyukIkrKazananIlIlceler.get(0).il);
-                                    TextView v1 = (TextView) findViewById(R.id.sonucTextView);
-                                    v1.setText(obj.data.rakamlarNumaraSirasi);
-                                    ((TextView) findViewById(R.id.tarihTextView)).setText(obj.data.cekilisTarihi);
+                                    updateDash(obj);
                                 }
                             }, parent.getAdapter().getItem(0).toString());
                         }
@@ -134,28 +129,15 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-//				new CekilisRequest().execute();
-
-                RequestManager.getSayisal(new FetchJsonTask.Callback<SayisalSonuc>() {
-                    @Override
-                    public void onFail() {
-                        Log.d("MilliPiyango", "HATA!");
-//				Toast.makeText(.getContext(), "BAŞARISIZLIK!", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onStart() {
-                        Log.d("MilliPiyango", "ONSTART");
-                    }
-
-                    @Override
-                    public void onSuccess(final SayisalSonuc obj) {
-                        Log.d("MilliPiyango", "YAY!");
-                        Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi + "\t" + obj.data.buyukIkrKazananIlIlceler.get(0).il );
-						TextView v1 = (TextView)findViewById(R.id.sonucTextView);
-						v1.setText(obj.data.rakamlarNumaraSirasi);
-                    }
-                },"20160213");
+                String tempStr = "";
+                tempStr += ((EditText) findViewById(R.id.editText)).getText().toString().trim()+"#";
+                tempStr += ((EditText) findViewById(R.id.editText2)).getText().toString().trim()+"#";
+                tempStr += ((EditText) findViewById(R.id.editText3)).getText().toString().trim()+"#";
+                tempStr += ((EditText) findViewById(R.id.editText4)).getText().toString().trim()+"#";
+                tempStr += ((EditText) findViewById(R.id.editText5)).getText().toString().trim()+"#";
+                tempStr += ((EditText) findViewById(R.id.editText6)).getText().toString().trim();
+                ((ProgressBar) findViewById(R.id.kacBildimBar)).setProgress(0);
+                ((ProgressBar) findViewById(R.id.kacBildimBar)).setProgress(getMatches(cikanRakam, tempStr));
 			}
 		});
 	}
@@ -168,5 +150,43 @@ public class MainActivity extends Activity {
 		
 		return true;
 	}
+
+    public void updateDash( SayisalSonuc obj){
+        cikanRakam = obj.data.rakamlar;
+        Log.d("MilliPiyango", obj.data.cekilisTarihi + "\t" + obj.data.rakamlarNumaraSirasi );
+        TextView v1 = (TextView) findViewById(R.id.sonucTextView);
+        v1.setText(obj.data.rakamlarNumaraSirasi);
+        ((TextView) findViewById(R.id.tarihTextView)).setText(obj.data.cekilisTarihi);
+        String tempStr = "";
+        tempStr += ((EditText) findViewById(R.id.editText)).getText().toString().trim()+"#";
+        tempStr += ((EditText) findViewById(R.id.editText2)).getText().toString().trim()+"#";
+        tempStr += ((EditText) findViewById(R.id.editText3)).getText().toString().trim()+"#";
+        tempStr += ((EditText) findViewById(R.id.editText4)).getText().toString().trim()+"#";
+        tempStr += ((EditText) findViewById(R.id.editText5)).getText().toString().trim()+"#";
+        tempStr += ((EditText) findViewById(R.id.editText6)).getText().toString().trim();
+        ((ProgressBar) findViewById(R.id.kacBildimBar)).setProgress(0);
+
+        ((ProgressBar) findViewById(R.id.kacBildimBar)).setProgress(getMatches(obj.data.rakamlar, tempStr));
+    }
+
+    public int getMatches(String cikanRakamlar, String testRakamlar){
+        String[] cikan = cikanRakamlar.split("#");
+        String[] test = testRakamlar.split("#");
+        if(cikan.length != test.length)
+            return -1;
+
+        int count = 0;
+        for (int i = 0 ; cikan.length > i ; i++){
+            for (int k = 0 ; test.length > k ; k++) {
+                if (Integer.parseInt(cikan[i])==Integer.parseInt(test[k])) {
+                    count++;
+                    break;
+                }
+            }
+        }
+
+        Log.d("MilliPiyango", count+"");
+        return count;
+    }
 
 }
