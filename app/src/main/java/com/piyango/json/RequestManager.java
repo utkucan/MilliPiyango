@@ -1,8 +1,5 @@
 package com.piyango.json;
 
-import java.util.List;
-import java.util.Locale;
-
 import com.piyango.millipiyango.CekilisRequest;
 import com.piyango.model.SayisalSonuc;
 import com.piyango.model.SonucTarih;
